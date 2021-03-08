@@ -1,0 +1,5 @@
+*{margin:0;padding:0;box-sizing:border-box !important;}
+.navbar-nav a:hover{background-color:red; border-radius:10px !important;}
+.nav-item{font-size:20px; !important; }
+.logopic {width:100px;}
+ul{display:flex; flex-direction:row; justify-content:space-evenly}

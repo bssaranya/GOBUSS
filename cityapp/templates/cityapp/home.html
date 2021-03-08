@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dependent Dropdown in Django</title>
+    <style>
+
+    <style>
+        fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+                font-size: 1.2em !important;
+
+    text-align: center !important
+
+}
+
+legend.scheduler-border {
+    width: auto !important;
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+    </style>
+</head>
+<body>
+<div>
+{% include 'layout/signinheader.html' %}
+</div>
+
+<div
+    class="p-5 text-center bg-image"
+    style="
+      background-image: url('/static/images/bg20.jpg');
+      height: 400px;
+
+    "
+  >
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="d-flex justify-content-center align-items-center h-100">
+
+
+
+
+<div class="container-fluid">
+<div class="search-box justify-content-center text-white ">
+<form method="post" id="displayForm" data-stations-url="{% url 'ajax_load_stations' %}">
+    {% csrf_token %}
+
+
+        <legend class="scheduler-border">Find Your Bus</legend>
+<!--    <h2>Find Yor Bus</h2>-->
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+
+</form>
+</div>
+</div>
+</div>
+    </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_cities").change(function () {
+        const url = $("#displayForm").attr("data-stations-url");  // get the url of the `load_cities` view
+        const cityId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'city_id': cityId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                console.log(data);
+<!--                ("#id_stations").html(data); // replace the contents of the city input with the data that came from the server-->
+
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (station) {
+                    html_data += `<option value="${station.id}">${station.stationname}</option>`
+                });
+                console.log(html_data);
+                $("#id_stations").html(html_data);
+
+
+            }
+        });
+
+    });
+</script>
+
+<div>
+<footer>
+    {% include 'layout/signin.html' %}
+</footer>
+</div>
+</body>
+</html>

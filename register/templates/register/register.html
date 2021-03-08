@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>register</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    {% include 'layout/header.html' %}
+</div>
+
+<section class="box my-5">
+    <form method="post" action=" ">
+        {% csrf_token %}
+        <div class="container-fluid">
+
+
+            <div class="row row-cols-2">
+
+              <div class="col mt-3 d-flex justify-content-end">
+                  <label for="name">Name:</label>
+              </div>
+
+              <div class="col mt-3">
+                 {{form.name}}
+                </div>
+
+              <div class="col mt-3 d-flex justify-content-end">
+                <label for="phno">Phone Number:</label>
+              </div>
+
+              <div class="col mt-3">
+               {{form.phno}}
+              </div>
+
+
+              <div class="col mt-3 d-flex justify-content-end">
+                <label for="email">Email:</label>
+              </div>
+
+              <div class="col mt-3">
+                 {{form.email}}
+              </div>
+
+
+              <div class="col mt-3 d-flex justify-content-end">
+                <label for="username">Username:</label>
+              </div>
+
+              <div class="col mt-3">
+                 {{form.username}}
+              </div>
+
+
+              <div class="col mt-3 d-flex justify-content-end">
+                <label for="password">Password: </label>
+              </div>
+
+              <div class="col mt-3">
+                {{form.password}}
+              </div>
+
+
+              <div class="col mt-3 d-flex justify-content-end">
+                <label for="confirmpassword"> Confirm Password:</label>
+              </div>
+
+              <div class="col mt-3">
+                {{form.confirmpassword}}
+              </div>
+
+                <div>
+                    <script>
+                    function matchPaaword(){
+                        var pw1 = document.getElementById("id_password").value;
+                        var pw2 = document.getElementById("id_confirmpassword").value;
+                        if(pw1 != pw2){
+                         alert("password mismatch")
+                         }
+                         else{
+                         alert("successfully regestered")
+                         }
+                     }
+                    </script>
+                </div>
+
+            </div>
+        </div>
+
+                <div>
+                    {% if messages %}
+                         <ul class="messages">
+                             {% for message in messages %}
+                                  <li class="{{ message.tags }}">{{ message }}</li>
+                             {% endfor %}
+                         </ul>
+                     {% endif %}
+                </div>
+
+
+
+        <div class="container">
+
+            <div class="row justify-content-center mt-3">
+              <div ng-app="">
+
+                    <input type="checkbox" ng-model="ischecked">
+                    <label>I agree to receive communications from goBus.</label>
+                    <p>By submitting this form, you agree to gO bUS’s Privacy Policy.</p>
+
+                     <div class="row justify-content-center mt-3">
+                         <p ng-if = "ischecked">.
+                     <button ng-show==ischecked class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="matchPaaword()">GO</button>
+                         </p>
+                    </div>
+
+              </div>
+            </div>
+        </div>
+
+
+    </form>
+</section>
+    <div class="container-fluid">
+    {% include 'layout/footer.html' %}
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

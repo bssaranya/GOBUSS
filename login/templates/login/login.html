@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Login</title>
+</head>
+<div>
+
+    <div >
+        {% include 'layout/header.html' %}
+    </div>
+    <div class="container">
+    <div class="justify-content-center my-3 text-dark text-center " >
+
+        <h1>Login into gObUS</h1>
+    </div>
+    </div>
+
+<div class="box">
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="container">
+
+            <div class="row row-cols-2">
+
+              <div class="col mt-3 d-flex justify-content-end">
+                  <label for="username">Username: </label>
+              </div>
+
+                <div class="col mt-3 d-flex ">
+                    {{form.username}}
+                </div>
+              <div class="col mt-3 d-flex justify-content-end">
+                <label for="password">Password: </label>
+              </div>
+
+                <div class="col mt-3 d-flex ">
+                    {{form.password}}
+                </div>
+            </div>
+        </div>
+      <div class="container">
+        <div class="row justify-content-center mt-3">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">GO</button>
+        </div>
+      </div>
+
+
+    </form>
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+    <div class="register mt-2 mb-3">
+    <form method = "GET" action="{% url 'register' %}">
+          {% csrf_token %}
+       <button class="btn btn-lg btn-primary " type="submit" value="submit">Register</button>
+    </form>
+    </div>
+
+</div>
+</div>
+</section>
+
+
+<section class="login">
+
+
+
+</section>
+
+<div class="container-fluid">
+    {% include 'layout/footer.html' %}
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
